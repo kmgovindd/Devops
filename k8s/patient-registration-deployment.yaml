@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    app: patient-registration
+  name: patient-registration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-registration
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/f21ao-cw-default: "true"
+        app: patient-registration
+    spec:
+      containers:
+        - image: suhanaayishahw/patient-registration:latest
+          name: patient-registration
+          ports:
+            - containerPort: 3001
+              hostPort: 3001
+              protocol: TCP
+      hostname: patient
+      restartPolicy: Always
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: patient-registration
+#   name: patient-registration-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: patient-registration
+#   template:
+#     metadata:
+#       labels:
+#         app: patient-registration
+#     spec:
+#       containers:
+#         - image: suhanaayishahw/patient-registration:latest
+#           name: patient-registration
+#           ports:
+#             - containerPort: 3001

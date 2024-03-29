@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: patient-registration
+  name: patient-registration-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-registration
+  template:
+    metadata:
+      labels:
+        app: patient-registration
+    spec:
+      containers:
+        - image: suhanaayishahw/patient-registration:latest
+          name: patient-registration
+          ports:
+            - containerPort: 3001
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: patient-registration-service
+spec:
+  type: NodePort
+  selector:
+    app: patient-registration
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+      nodePort: 30100

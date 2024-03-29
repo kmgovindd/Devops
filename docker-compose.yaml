@@ -1,0 +1,18 @@
+version: '3'
+services:
+  authentication:
+    hostname: 'authentication'
+    build: './authentication-service/'
+    ports:
+    - "3003:3003"
+  patient-registration:
+    hostname: 'patient'
+    build: './patientRegistration/'
+    ports:
+    - "3001:3001"
+  lab-operations:
+    hostname: 'laboperations'
+    build: './laboperations/'
+    ports:
+    - "3002:3002"
+    

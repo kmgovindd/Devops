@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    app: authentication
+  name: authentication
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/f21ao-cw-default: "true"
+        app: authentication
+    spec:
+      containers:
+        - image: suhanaayishahw/authentication:latest
+          name: authentication
+          ports:
+            - containerPort: 3003
+              hostPort: 3003
+              protocol: TCP
+      hostname: authentication
+      restartPolicy: Always
